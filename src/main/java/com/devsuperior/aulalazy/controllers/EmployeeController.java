@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.aulalazy.dto.EmployeeDepartmentDTO;
@@ -19,22 +20,22 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService service;
-	
+
 	@GetMapping(value = "/{id}/min")
 	public ResponseEntity<EmployeeMinDTO> findByIdMin(@PathVariable Long id) {
-		EmployeeMinDTO obj = service.findByIdMin(id);		
+		EmployeeMinDTO obj = service.findByIdMin(id);
 		return ResponseEntity.ok(obj);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<EmployeeDepartmentDTO> findByIdWithDepartment(@PathVariable Long id) {
-		EmployeeDepartmentDTO obj = service.findByIdWithDepartment(id);		
+		EmployeeDepartmentDTO obj = service.findByIdWithDepartment(id);
 		return ResponseEntity.ok(obj);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<EmployeeDepartmentDTO>> findEmployeesWithDepartments() {
-		List<EmployeeDepartmentDTO> list = service.findEmployeesWithDepartments();		
+	public ResponseEntity<List<EmployeeMinDTO>> findByName(@RequestParam(defaultValue = "") String name) {
+		List<EmployeeMinDTO> list = service.findByName(name);
 		return ResponseEntity.ok(list);
 	}
 }

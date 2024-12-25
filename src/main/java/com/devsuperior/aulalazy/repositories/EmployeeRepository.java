@@ -30,4 +30,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	 * on d1_0.id=e1_0.department_id
 	 * 
 	 */
+
+	// JPA QUERY METHODS
+	List<Employee> findByNameIgnoreCase(String name);
 }
