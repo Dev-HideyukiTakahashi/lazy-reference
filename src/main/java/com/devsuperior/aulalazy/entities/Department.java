@@ -3,6 +3,8 @@ package com.devsuperior.aulalazy.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,10 +15,11 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	public String name;
-	
+
 	@OneToMany(mappedBy = "department")
+	@JsonIgnore
 	public List<Employee> employees = new ArrayList<>();
-	
+
 	public Department() {
 	}
 

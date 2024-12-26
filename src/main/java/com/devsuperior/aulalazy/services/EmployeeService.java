@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,12 @@ public class EmployeeService {
 
 	public List<EmployeeDepartmentDTO> findByDepartmentName(String departmentName) {
 		List<EmployeeDepartmentDTO> result = repository.findByDepartmentName(departmentName);
+		return result;
+	}
+
+	@Transactional
+	public Page<Employee> findAll(Pageable pageable) {
+		Page<Employee> result = repository.searchAll(pageable);
 		return result;
 	}
 }
