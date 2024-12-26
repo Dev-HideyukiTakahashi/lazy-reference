@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.devsuperior.aulalazy.dto.EmployeeDepartmentDTO;
 import com.devsuperior.aulalazy.entities.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
@@ -33,4 +34,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	// JPA QUERY METHODS
 	List<Employee> findByNameIgnoreCase(String name);
+
+	/*
+	 * JPQL - NO SELECT QUANDO NÃO É A CLASSE ENTIDADE (SE FOSSE BASTARIA PASSAR
+	 * SELECT obj)
+	 * INFORMAMOS O CAMINHO DA CLASSE QUE VAMOS INSTANCIAR
+	 * CHAMAMOS O NOME DA CLASSE ENTIDADE NO FROM COM O ALIAS
+	 * E USAMOS O CONSTRUTOR DA CLASSE DTO NESSE CASO
+	 */
+	@Query("SELECT new com.devsuperior.aulalazy.dto.EmployeeDepartmentDTO(obj) "
+			+ "FROM Employee obj "
+			+ "WHERE obj.department.name = :departmentName")
+	List<EmployeeDepartmentDTO> findByDepartmentName(String departmentName);
+
 }

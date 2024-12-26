@@ -38,4 +38,11 @@ public class EmployeeController {
 		List<EmployeeMinDTO> list = service.findByName(name);
 		return ResponseEntity.ok(list);
 	}
+
+	@GetMapping("/{departmentName}/department")
+	public ResponseEntity<List<EmployeeDepartmentDTO>> findByDepartmentName(
+			@PathVariable String departmentName) {
+		List<EmployeeDepartmentDTO> list = service.findByDepartmentName(departmentName);
+		return ResponseEntity.ok(list);
+	}
 }

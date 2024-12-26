@@ -42,4 +42,9 @@ public class EmployeeService {
 		List<Employee> result = repository.findByNameIgnoreCase(name);
 		return result.stream().map(x -> new EmployeeMinDTO(x)).collect(Collectors.toList());
 	}
+
+	public List<EmployeeDepartmentDTO> findByDepartmentName(String departmentName) {
+		List<EmployeeDepartmentDTO> result = repository.findByDepartmentName(departmentName);
+		return result;
+	}
 }
