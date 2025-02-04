@@ -1,13 +1,15 @@
 Cláusula JOIN FETCH
 
-Nota: esta cláusula não funciona para buscas paginadas do Spring.
-
 Exemplo:
 
-`public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-@Query("SELECT obj FROM Employee obj JOIN FETCH obj.department")
-List<Employee> findEmployeesWithDepartments();
-}`
+```
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+  @Query("SELECT obj FROM Employee obj JOIN FETCH obj.department")
+  List<Employee> findEmployeesWithDepartments();
+}
+```
+
+Nota: esta cláusula não funciona para buscas paginadas(pageable) do Spring.
 
 ---
 
@@ -17,9 +19,8 @@ Transactional e open-in-view no Spring
 (1) resolução da transação com o banco de dados
 (2) resolução de todas pendências “lazy” com o banco de dados
 
-• A propriedade spring.jpa.open-in-view=false faz com que a sessão
-JPA seja encerrada antes de voltar para a camada controller
-(camada web)
+• A propriedade `spring.jpa.open-in-view=false` no application.properties faz com que a sessão
+JPA seja encerrada antes de voltar para a camada controller(camada web), ou seja na camada services
 
 ---
 
